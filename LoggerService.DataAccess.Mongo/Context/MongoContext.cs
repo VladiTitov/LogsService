@@ -1,5 +1,5 @@
 ﻿using System;
-using LogsService.Common.Configs;
+using LogsService.Common.Configs.Interfaces;
 using LogsService.Common.Models;
 using MongoDB.Driver;
 
@@ -10,12 +10,12 @@ namespace LogsService.DataAccess.Mongo.Context
         public IMongoDatabase Database { get; set; }
         public IMongoCollection<LogModel> Collection { get; set; }
 
-        public MongoContext(Settings settings)
+        public MongoContext(IMongoDatabaseConfiguration mongoDatabaseConfiguration)
         {
-            var client = new MongoClient(settings.ConnectionString);
+            var client = new MongoClient(mongoDatabaseConfiguration.ConnectionString);
 
-            Database = client.GetDatabase(settings.DataBaseName);
-            Collection = Database.GetCollection<LogModel>(settings.CollectionName);
+            Database = client.GetDatabase(mongoDatabaseConfiguration.DataBaseName);
+            Collection = Database.GetCollection<LogModel>(mongoDatabaseConfiguration.CollectionName);
         }
 
         public void Dispose()

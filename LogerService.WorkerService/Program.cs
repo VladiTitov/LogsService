@@ -5,6 +5,10 @@ using LogsService.FluentJobManager;
 using LogsService.Common.Configs;
 using LogsService.Common.Configs.Implementations;
 using LogsService.Common.Configs.Interfaces;
+using LogsService.DataAccess.Mongo.Context;
+using LogsService.DataAccess.Mongo.Repositories;
+using FluentScheduler;
+using LogsService.FluentJobManager.Jobs;
 
 namespace LogsService.WorkerService
 {
@@ -25,9 +29,15 @@ namespace LogsService.WorkerService
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddSingleton<Settings>();
-                    services.AddSingleton<JobRegistryService>();
+                    services.AddSingleton<JobRegistryService>();               
 
+                    services.Configure<ConfigMongoDb>(hostContext.Configuration.GetSection("MongoParams"));
                     services.AddSingleton<IMongoDatabaseConfiguration, MongoDatabaseConfiguration>();
+
+                    services.AddSingleton<IMongoContext, MongoContext>();
+                    services.AddSingleton<IMongoRepository, MongoRepository>();
+
+                    services.AddSingleton<IJob, RabbitMqConsumerData>();
 
                     services.AddHostedService<WorkerService>();
                 });

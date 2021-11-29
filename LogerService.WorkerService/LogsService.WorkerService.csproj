@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LoggerService.DataAccess.Mongo\LogsService.DataAccess.Mongo.csproj" />
     <ProjectReference Include="..\LogsService.Common\LogsService.Common.csproj" />
     <ProjectReference Include="..\LogsService.JobManager\LogsService.FluentJobManager.csproj" />
   </ItemGroup>

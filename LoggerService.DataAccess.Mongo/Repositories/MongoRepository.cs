@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using LogsService.Common.Configs;
 using LogsService.Common.Models;
 using LogsService.DataAccess.Mongo.Context;
 
@@ -7,19 +6,16 @@ namespace LogsService.DataAccess.Mongo.Repositories
 {
     public class MongoRepository : IMongoRepository
     {
-        private readonly Settings _settings;
+        private readonly IMongoContext _mongoContext;
 
-        public MongoRepository(Settings settings)
+        public MongoRepository(IMongoContext mongoContext)
         {
-            _settings = settings;
+            _mongoContext = mongoContext;
         }
 
         public async Task Add(LogModel item)
         {
-            using (var db = new MongoContext(_settings))
-            {
-                await db.Collection.InsertOneAsync(item);
-            }
+            await _mongoContext.Collection.InsertOneAsync(item);
         }
     }
 }

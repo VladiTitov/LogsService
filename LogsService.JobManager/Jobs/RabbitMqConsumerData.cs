@@ -1,5 +1,4 @@
 ﻿using FluentScheduler;
-using LogsService.Common.Configs;
 using LogsService.Common.Models;
 using LogsService.DataAccess.Mongo.Repositories;
 
@@ -7,17 +6,15 @@ namespace LogsService.FluentJobManager.Jobs
 {
     public class RabbitMqConsumerData : IJob
     {
-        private readonly Settings _settings;
         private IMongoRepository _mongoRepository;
 
-        public RabbitMqConsumerData(Settings settings)
+        public RabbitMqConsumerData(IMongoRepository mongoRepository)
         {
-            _settings = settings;
+            _mongoRepository = mongoRepository;
         }
 
         public async void Execute()
         {
-            _mongoRepository = new MongoRepository(_settings);
             await _mongoRepository.Add(new LogModel {Info = "First label"});
         }
     }

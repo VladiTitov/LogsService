@@ -6,5 +6,6 @@
         string DataBaseName { get; set; }
         string Server { get; set; }
         string Port { get; set; }
+        string ConnectionString { get; set; }
     }
 }
