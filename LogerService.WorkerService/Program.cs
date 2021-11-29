@@ -1,11 +1,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LogsService.JobManager;
 
-namespace LogerService.WorkerService
+namespace LoggerService.WorkerService
 {
     public class Program
     {
@@ -16,9 +18,16 @@ namespace LogerService.WorkerService
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseWindowsService()
+                .ConfigureAppConfiguration(confBuilder =>
+                {
+                    confBuilder.AddJsonFile("appsettings.json");
+                })
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<Worker>();
+                    services.AddSingleton<JobRegistryService>();
+
+                    services.AddHostedService<WorkerService>();
                 });
     }
 }
