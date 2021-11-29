@@ -2,11 +2,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using FluentScheduler;
-using LogsService.JobManager;
+using LogsService.FluentJobManager;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace LoggerService.WorkerService
+namespace LogsService.WorkerService
 {
     class WorkerService : IHostedService
     {

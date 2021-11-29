@@ -1,13 +1,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LogsService.JobManager;
+using LogsService.FluentJobManager;
+using LogsService.Common.Configs;
+using LogsService.Common.Configs.Implementations;
+using LogsService.Common.Configs.Interfaces;
 
-namespace LoggerService.WorkerService
+namespace LogsService.WorkerService
 {
     public class Program
     {
@@ -25,7 +24,10 @@ namespace LoggerService.WorkerService
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddSingleton<Settings>();
                     services.AddSingleton<JobRegistryService>();
+
+                    services.AddSingleton<IMongoDatabaseConfiguration, MongoDatabaseConfiguration>();
 
                     services.AddHostedService<WorkerService>();
                 });
