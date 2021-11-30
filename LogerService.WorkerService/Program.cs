@@ -3,8 +3,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using LogsService.FluentJobManager;
 using LogsService.Common.Configs;
-using LogsService.Common.Configs.Implementations;
-using LogsService.Common.Configs.Interfaces;
 using LogsService.DataAccess.Mongo.Context;
 using LogsService.DataAccess.Mongo.Repositories;
 using FluentScheduler;
@@ -31,8 +29,7 @@ namespace LogsService.WorkerService
                     services.AddSingleton<Settings>();
                     services.AddSingleton<JobRegistryService>();               
 
-                    services.Configure<ConfigMongoDb>(hostContext.Configuration.GetSection("MongoParams"));
-                    services.AddSingleton<IMongoDatabaseConfiguration, MongoDatabaseConfiguration>();
+                    services.Configure<MongoDatabaseConfiguration>(hostContext.Configuration.GetSection("MongoParams"));
 
                     services.AddSingleton<IMongoContext, MongoContext>();
                     services.AddSingleton<IMongoRepository, MongoRepository>();

@@ -1,5 +1,4 @@
-﻿using LogsService.Common.Configs.Interfaces;
-using LogsService.Common.Extensions;
+﻿using LogsService.Common.Extensions;
 using Microsoft.Extensions.Configuration;
 
 namespace LogsService.Common.Configs

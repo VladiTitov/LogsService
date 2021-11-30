@@ -6,7 +6,7 @@ namespace LogsService.FluentJobManager.Jobs
 {
     public class RabbitMqConsumerData : IJob
     {
-        private IMongoRepository _mongoRepository;
+        private readonly IMongoRepository _mongoRepository;
 
         public RabbitMqConsumerData(IMongoRepository mongoRepository)
         {
