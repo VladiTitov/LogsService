@@ -1,13 +1,21 @@
-﻿using System;
-using FluentScheduler;
+﻿using FluentScheduler;
+using LogsService.Common.Models;
+using LogsService.DataAccess.Mongo.Repositories;
 
-namespace LogsService.JobManager.Jobs
+namespace LogsService.FluentJobManager.Jobs
 {
     public class RabbitMqConsumerData : IJob
     {
-        public void Execute()
+        private readonly IMongoRepository _mongoRepository;
+
+        public RabbitMqConsumerData(IMongoRepository mongoRepository)
         {
-            Console.WriteLine("Hello World!");
+            _mongoRepository = mongoRepository;
+        }
+
+        public async void Execute()
+        {
+            await _mongoRepository.Add(new LogModel {Info = "First label"});
         }
     }
 }

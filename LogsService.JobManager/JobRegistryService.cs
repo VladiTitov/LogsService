@@ -1,17 +1,18 @@
 ﻿using FluentScheduler;
-using LogsService.JobManager.Jobs;
+using LogsService.Common.Configs;
 
-namespace LogsService.JobManager
+namespace LogsService.FluentJobManager
 {
     public class JobRegistryService : Registry
     {
-        public JobRegistryService()
+        public JobRegistryService(Settings settings, IJob job)
         {
-            Schedule(() => new RabbitMqConsumerData())
+            Schedule(() => job)
                 .NonReentrant()
                 .ToRunNow()
-                .AndEvery(10)
+                .AndEvery(settings.RunInterval)
                 .Seconds();
+
         }
     }
 }

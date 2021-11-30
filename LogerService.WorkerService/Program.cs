@@ -1,13 +1,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LogsService.JobManager;
+using LogsService.FluentJobManager;
+using LogsService.Common.Configs;
+using LogsService.DataAccess.Mongo.Context;
+using LogsService.DataAccess.Mongo.Repositories;
+using FluentScheduler;
+using LogsService.FluentJobManager.Jobs;
 
-namespace LoggerService.WorkerService
+namespace LogsService.WorkerService
 {
     public class Program
     {
@@ -25,7 +26,15 @@ namespace LoggerService.WorkerService
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddSingleton<JobRegistryService>();
+                    services.AddSingleton<Settings>();
+                    services.AddSingleton<JobRegistryService>();               
+
+                    services.Configure<MongoDatabaseConfiguration>(hostContext.Configuration.GetSection("MongoParams"));
+
+                    services.AddSingleton<IMongoContext, MongoContext>();
+                    services.AddSingleton<IMongoRepository, MongoRepository>();
+
+                    services.AddSingleton<IJob, RabbitMqConsumerData>();
 
                     services.AddHostedService<WorkerService>();
                 });
