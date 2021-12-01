@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogsService.DataAccess.Mong
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogsService.Common", "LogsService.Common\LogsService.Common.csproj", "{A93B3003-EE3D-4BB0-BBCD-1A7EAAAA843A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogsService.RabbitMQ", "LogsService.RabbitMQ\LogsService.RabbitMQ.csproj", "{F001427F-A21F-4FC3-B2D6-590897B7661D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogsService.RabbitMQ", "LogsService.RabbitMQ\LogsService.RabbitMQ.csproj", "{F001427F-A21F-4FC3-B2D6-590897B7661D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogsService.RabbitMQ.Tests", "LogsService.RabbitMQ.Tests\LogsService.RabbitMQ.Tests.csproj", "{E987EEEA-F1BE-47B0-A3F0-11B3B2022778}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{F001427F-A21F-4FC3-B2D6-590897B7661D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F001427F-A21F-4FC3-B2D6-590897B7661D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F001427F-A21F-4FC3-B2D6-590897B7661D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E987EEEA-F1BE-47B0-A3F0-11B3B2022778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E987EEEA-F1BE-47B0-A3F0-11B3B2022778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E987EEEA-F1BE-47B0-A3F0-11B3B2022778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E987EEEA-F1BE-47B0-A3F0-11B3B2022778}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
