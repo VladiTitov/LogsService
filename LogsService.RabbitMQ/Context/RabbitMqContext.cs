@@ -8,6 +8,8 @@ namespace LogsService.RabbitMQ.Context
     {
         private readonly RabbitMqConfiguration _rabbitMqConfiguration;
 
+        public IConnection Connection => GetRabbitConnection();
+
         public RabbitMqContext(IOptions<RabbitMqConfiguration> rabbitMqConfiguration)
         {
             _rabbitMqConfiguration = rabbitMqConfiguration.Value;

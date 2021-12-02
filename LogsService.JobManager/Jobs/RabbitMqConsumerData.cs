@@ -1,25 +1,20 @@
 ﻿using FluentScheduler;
-using LogsService.DataAccess.Mongo.Repositories;
-using LogsService.RabbitMQ.Services.Interfaces;
+using LogsService.RabbitMQ.Services;
 
 namespace LogsService.FluentJobManager.Jobs
 {
     public class RabbitMqConsumerData : IJob
     {
-        private readonly IMongoRepository _mongoRepository;
-        private readonly IRabbitMqListener _rabbitMqListener;
+        private readonly IRabbitMqListener _listener;
 
-        public RabbitMqConsumerData(IMongoRepository mongoRepository, IRabbitMqListener rabbitMqListener)
+        public RabbitMqConsumerData(IRabbitMqListener listener)
         {
-            _mongoRepository = mongoRepository;
-            _rabbitMqListener = rabbitMqListener;
+            _listener = listener;
         }
 
-        public async void Execute()
+        public void Execute()
         {
-            _rabbitMqListener.Connect();
-
-            //await _mongoRepository.Add(new LogModel {Info = "First label"});
+            _listener.ChannelConsume();
         }
     }
 }
