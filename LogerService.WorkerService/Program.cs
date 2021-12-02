@@ -1,12 +1,14 @@
+using FluentScheduler;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
-using LogsService.FluentJobManager;
 using LogsService.Common.Configs;
+using LogsService.FluentJobManager;
+using LogsService.FluentJobManager.Jobs;
 using LogsService.DataAccess.Mongo.Context;
 using LogsService.DataAccess.Mongo.Repositories;
-using FluentScheduler;
-using LogsService.FluentJobManager.Jobs;
+using LogsService.RabbitMQ.Context;
+using LogsService.RabbitMQ.Services;
 
 namespace LogsService.WorkerService
 {
@@ -23,6 +25,8 @@ namespace LogsService.WorkerService
                 .ConfigureAppConfiguration(confBuilder =>
                 {
                     confBuilder.AddJsonFile("appsettings.json");
+                    confBuilder.AddJsonFile("Configs/rabbitMq-config.json");
+                    confBuilder.AddJsonFile("Configs/mongoDb-config.json");
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
@@ -30,9 +34,13 @@ namespace LogsService.WorkerService
                     services.AddSingleton<JobRegistryService>();               
 
                     services.Configure<MongoDatabaseConfiguration>(hostContext.Configuration.GetSection("MongoParams"));
+                    services.Configure<RabbitMqConfiguration>(hostContext.Configuration.GetSection("RabbitParams"));
 
                     services.AddSingleton<IMongoContext, MongoContext>();
                     services.AddSingleton<IMongoRepository, MongoRepository>();
+
+                    services.AddSingleton<IRabbitMqContext, RabbitMqContext>();
+                    services.AddSingleton<IRabbitMqListener, RabbitMqListener>();
 
                     services.AddSingleton<IJob, RabbitMqConsumerData>();
 
