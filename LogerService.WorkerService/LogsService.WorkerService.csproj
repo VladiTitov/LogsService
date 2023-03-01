@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>dotnet-LogerService.WorkerService-012E2D04-63B0-45A2-AE86-10C9A646ECA8</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentScheduler" Version="5.5.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LoggerService.DataAccess.Mongo\LogsService.DataAccess.Mongo.csproj" />
+    <ProjectReference Include="..\LogsService.Common\LogsService.Common.csproj" />
+    <ProjectReference Include="..\LogsService.JobManager\LogsService.FluentJobManager.csproj" />
+    <ProjectReference Include="..\LogsService.RabbitMQ\LogsService.RabbitMQ.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentScheduler" Version="5.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LoggerService.DataAccess.Mongo\LogsService.DataAccess.Mongo.csproj" />
+    <ProjectReference Include="..\LogsService.RabbitMQ\LogsService.RabbitMQ.csproj" />
+  </ItemGroup>
+
+</Project>
